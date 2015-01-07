@@ -1,0 +1,18 @@
+import urllib.request
+response=urllib.request.urlopen('http://facebook.com')
+html=response.read()
+html=str(html)
+x='href='
+def find_link(html):
+    liste=[]
+    while x in html:
+        debut=html.find('href')
+        milieu=html.find('"',debut)
+        fin=html.find(">",milieu)
+        lien=html[milieu+1:fin]
+        liste.append(lien)
+        html=html[fin:]     
+    return liste
+lite=find_link(html)
+for e in lite:
+    print(e)
